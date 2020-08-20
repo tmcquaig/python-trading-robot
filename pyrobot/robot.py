@@ -887,7 +887,7 @@ class PyRobot():
                 redirect_uri=REDIRECT_URI,
                 credentials_path=CREDENTIALS_PATH
             )
-            >>> trading_robot_accounts = tradeconsole_session.get_accounts(
+            >>> trading_robot_accounts = trading_robot.session.get_accounts(
                 account_number="<YOUR ACCOUNT NUMBER>"
             )
             >>> trading_robot_accounts
@@ -1076,7 +1076,7 @@ class PyRobot():
                 redirect_uri=REDIRECT_URI,
                 credentials_path=CREDENTIALS_PATH
             )
-            >>> trading_robot_positions = tradeconsole_session.get_positions(
+            >>> trading_robot_positions = trading_robot.session.get_positions(
                 account_number="<YOUR ACCOUNT NUMBER>"
             )
             >>> trading_robot_positions
@@ -1153,9 +1153,7 @@ class PyRobot():
         positions_lists = []
 
         if isinstance(positions_response, dict):
-
-            position_dict = {}
-
+            
             for account_type_key in positions_response:
 
                 account_info = positions_response[account_type_key]
@@ -1164,6 +1162,7 @@ class PyRobot():
                 positions = account_info['positions']
 
                 for position in positions:
+                    position_dict = {}
                     position_dict['account_number'] = account_id
                     position_dict['average_price'] = position['averagePrice']
                     position_dict['market_value'] = position['marketValue']
@@ -1193,8 +1192,6 @@ class PyRobot():
 
             for account in positions_response:
 
-                position_dict = {}
-
                 for account_type_key in account:
 
                     account_info = account[account_type_key]
@@ -1203,6 +1200,7 @@ class PyRobot():
                     positions = account_info['positions']
 
                     for position in positions:
+                        position_dict = {}
                         position_dict['account_number'] = account_id
                         position_dict['average_price'] = position['averagePrice']
                         position_dict['market_value'] = position['marketValue']
